@@ -63,8 +63,9 @@ $(document).ready(function()
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Recruitment Agency CMS</a>
+                </button>               
+                 <a class="navbar-brand" href="">Recruitment Agency CMS</a>
+             
             </div>
             <!-- /.navbar-header -->
 

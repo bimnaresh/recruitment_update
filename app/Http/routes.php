@@ -15,7 +15,8 @@ Route::get('/', 'HomeController@index');
 
 Route::get('home', 'HomeController@index');
 Route::group(['middleware'=>'auth'],function(){
-
+Route::group(['middleware' => 'App\Http\Middleware\BlockMiddleware'], function()
+{
 
 Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 {
@@ -51,6 +52,7 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 	Route::get('empdemand','AgentController@demand_view');
 	Route::get('dem','DemandController@index');
 	Route::get('members','MemberController@index');
+});
 });
 
 Route::controllers([

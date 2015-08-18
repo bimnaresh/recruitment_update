@@ -30,16 +30,15 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		/* if(\Auth::user()->type==2 && \Auth::user()->loginas==2 && \Auth::user()->status==1)
-		{
-		return view('employer.index');
-		}
-		else if(\Auth::user()->type==3 && \Auth::user()->loginas==3 && \Auth::user()->status==1)
-		{
-			return view('agent.index');
-		}
-		else*/
+		if (\Auth::user()->status != 1)
+        {
+        	\Session::flash('message', 'You are Blocked by Admin');
+           
+        }
+
 			return view('home');
+		
+		
 	}
 
 }

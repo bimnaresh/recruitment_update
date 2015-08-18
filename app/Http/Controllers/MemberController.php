@@ -82,6 +82,11 @@ class MemberController extends Controller {
 	 */
 	public function show($id)
 	{
+		 if (Session::has('memberid'))
+		 {
+		 	$id=Session::get('memberid');
+		  }
+		
 		if($id==3)
 		{
 		$members = Member::where('type',3)->paginate(10);
@@ -141,12 +146,23 @@ class MemberController extends Controller {
 	}
 	public function block($id)
 	{
-		
+		$ret=Member::where('id',$id)->first();
+		if($ret->status==1)
+		{
 		$update= \DB::table('members')
             ->where('id', $id)
             ->update(['status' => 0]);
-            Session::flash('message', 'Member has been blocked successfully');
-            return \Redirect::to('home');
+
+            Session::flash('blockmessage', 'Member has been blocked successfully');
+        }else
+        {
+            $update= \DB::table('members')
+            ->where('id', $id)
+            ->update(['status' => 1]);
+            Session::flash('unblockmessage', 'Member has been unblocked successfully');
+        }
+        Session::flash('memberid',$ret->type);
+        return \Redirect::to('member/show');
 	}
 	/*
 	public function agent()

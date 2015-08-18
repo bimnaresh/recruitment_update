@@ -15,6 +15,12 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <a href="{{url()}}/member/create"><button  class="btn btn-primary">@if($u==2)Add Employer @elseif($u==3)Add Agent @else Add Admin @endif</button></a>
+                            @if (Session::has('blockmessage'))
+                             <div class="alert alert-danger">{{ Session::get('blockmessage') }}</div>
+                             @endif
+                              @if (Session::has('unblockmessage'))
+                             <div class="alert alert-info">{{ Session::get('unblockmessage') }}</div>
+                             @endif
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -54,10 +60,12 @@
                                                 <!--{!! Form::open(['method' => 'DELETE','route' => ['member.destroy', $member->id]]) !!}-->
                                                      <!--{!! Form::submit('Delete', ['class' => 'btn btn-primary']) !!}-->
                                                      <!--{!! Form::close() !!}-->
-                                                     @if($member->status==1)
+                                                @if($member->type!=1)
+                                                @if($member->status==1)
                                                  <a href="{{url()}}/member_block/{{{$member->id}}}"><button type="button" class="btn-xs btn-danger">Block</button></a>
                                                 @else
-                                                 <a href=""><button type="button" class="btn-xs btn-danger">Blocked</button></a>
+                                                 <a href="{{url()}}/member_block/{{{$member->id}}}"><button type="button" class="btn-xs btn-danger">Unblock</button></a>
+                                                 @endif
                                                  @endif
                                                 </td>
                                                
